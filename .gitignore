@@ -3,3 +3,9 @@
 ################################################################################
 
 /.vs/MazeGenerator/v14
+/MazeGenerator/bin/Debug
+/MazeGenerator/obj/Debug
+/MazeGeneratorWPF/bin/Debug
+/MazeGeneratorWPF/obj/Debug
+/MazeTest/bin/Debug
+/MazeTest/obj/Debug
