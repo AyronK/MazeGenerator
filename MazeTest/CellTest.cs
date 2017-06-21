@@ -1,10 +1,10 @@
 ﻿using MazeGenerator;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace MazeTest
+namespace MazeGeneratorTest
 {
     [TestClass]
-    class CellTest
+    public class CellTest
     {
         [TestMethod]
         public void ConstructorTest()
