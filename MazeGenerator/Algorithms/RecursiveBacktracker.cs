@@ -19,6 +19,9 @@ namespace MazeGenerator.Algorithms
             maze = new Maze(rowCount, columnCount);
             SelectCell(maze[0, 0]);
             maze.Entrance = selected;
+            maze.Entrance.RemoveWall(Direction.West);
+            maze.Exit = maze[rowCount-1, columnCount-1];
+            maze.Exit.RemoveWall(Direction.East);
 
             while (HasUnvisitedCells())
             {
@@ -34,7 +37,6 @@ namespace MazeGenerator.Algorithms
                     SelectCell(stack.Pop());
                 }
             }
-            maze.Exit = null;
             return maze;
         }
 

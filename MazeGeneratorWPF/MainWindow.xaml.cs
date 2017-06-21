@@ -52,7 +52,7 @@ namespace MazeGeneratorWPF
                         Rectangle rect = new Rectangle();
                         rect.Width = 20;
                         rect.Height = 20;
-                        rect.Fill = Brushes.ForestGreen;
+                        rect.Fill = Brushes.LightGreen;
                         MainCanvas.Children.Add(rect);
                         Canvas.SetTop(rect, i * 20);
                         Canvas.SetLeft(rect, j * 20);
@@ -62,7 +62,7 @@ namespace MazeGeneratorWPF
                         Rectangle rect = new Rectangle();
                         rect.Width = 20;
                         rect.Height = 20;
-                        rect.Fill = Brushes.DarkRed;
+                        rect.Fill = Brushes.LightPink;
                         MainCanvas.Children.Add(rect);
                         Canvas.SetTop(rect, i * 20);
                         Canvas.SetLeft(rect, j * 20);
