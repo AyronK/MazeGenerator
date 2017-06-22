@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="500.00" Width="500.00">
     <Grid x:Name="MainGrid" HorizontalAlignment="Left" Height="470" Margin="0,0,0,-1" VerticalAlignment="Top" Width="490">
-        <Button x:Name="button" Content="Generate" HorizontalAlignment="Center" Margin="45,15,308,0" VerticalAlignment="Top" Width="137" Height="25" Click="button_Click"/>
+        <Button x:Name="button_Recursive" Content="Recursive Backtracker" HorizontalAlignment="Center" Margin="45,15,308,0" VerticalAlignment="Top" Width="137" Height="25" Click="button_Recursive_Click"/>
         <Canvas x:Name="MainCanvas" HorizontalAlignment="Center" Height="400" Margin="45,50,45,0" VerticalAlignment="Top" Width="400"/>
+        <Button x:Name="button_Prisms" Content="Prism's Algorithm" HorizontalAlignment="Center" Margin="308,15,45,0" VerticalAlignment="Top" Width="137" Height="25" Click="button_Prisms_Click"/>
     </Grid>
 </Window>

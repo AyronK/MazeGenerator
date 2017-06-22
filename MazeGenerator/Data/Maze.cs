@@ -19,9 +19,16 @@ namespace MazeGenerator
 
         public Maze(int rowsCount, int columnsCount)
         {
+            CheckDimentions(rowsCount, columnsCount);
             RowsCount = rowsCount;
             ColumnsCount = columnsCount;
             CreateGrid();
+        }
+
+        private static void CheckDimentions(int rowsCount, int columnsCount)
+        {
+            if (rowsCount * columnsCount == 0)
+                throw new ArgumentException("Dimentions cannot be zero.");
         }
         #endregion
 

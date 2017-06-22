@@ -30,9 +30,15 @@ namespace MazeGeneratorWPF
             InitializeComponent();
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        private void button_Recursive_Click(object sender, RoutedEventArgs e)
         {
             maze = new RecursiveBacktracker().generate(20);
+            DrawMaze();
+        }
+
+        private void button_Prisms_Click(object sender, RoutedEventArgs e)
+        {
+            maze = new PrimsAlgorithm().generate(20);
             DrawMaze();
         }
 

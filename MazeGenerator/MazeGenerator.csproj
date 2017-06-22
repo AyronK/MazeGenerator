@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithms\MazeFactory.cs" />
+    <Compile Include="Algorithms\PrimsAlgorithm.cs" />
     <Compile Include="Algorithms\RecursiveBacktracker.cs" />
     <Compile Include="Data\Cell.cs" />
     <Compile Include="Data\Maze.cs" />
