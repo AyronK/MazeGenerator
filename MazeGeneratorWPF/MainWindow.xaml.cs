@@ -32,22 +32,22 @@ namespace MazeGeneratorWPF
 
         private void button_Recursive_Click(object sender, RoutedEventArgs e)
         {
-            maze = new RecursiveBacktracker().generate(20);
+            maze = new RecursiveBacktracker().generate(5);
             DrawMaze();
         }
 
         private void button_Prisms_Click(object sender, RoutedEventArgs e)
         {
-            maze = new PrimsAlgorithm().generate(20);
+            maze = new PrimsAlgorithm().generate(5);
             DrawMaze();
         }
 
         private void DrawMaze()
         {
             MainCanvas.Children.Clear();
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 5; i++)
             {
-                for (int j = 0; j < 20; j++)
+                for (int j = 0; j < 5; j++)
                 {
                     Cell cell = maze[i, j];
 

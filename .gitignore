@@ -9,3 +9,6 @@
 /MazeGeneratorWPF/obj/Debug
 /MazeTest/bin/Debug
 /MazeTest/obj/Debug
+/MazeTest/bin/x64/Debug
+/MazeTest/obj/x64/Debug
+/MazeTest/obj/x86/Debug
