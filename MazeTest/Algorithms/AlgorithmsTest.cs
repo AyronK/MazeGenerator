@@ -23,7 +23,7 @@ namespace MazeGeneratorTest.Algorithms
         }
 
         [TestMethod]
-        public void PrismsAlgorithmGenerateTest()
+        public void PrimsAlgorithmGenerateTest()
         {
             int rowCount = 10;
             int columnCount = 10;
