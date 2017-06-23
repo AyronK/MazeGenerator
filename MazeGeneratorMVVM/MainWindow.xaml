@@ -1,0 +1,160 @@
+﻿<Window x:Name="MazeGenerator" x:Class="MazeGeneratorMVVM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MazeGeneratorMVVM"
+        xmlns:vm="clr-namespace:MazeGeneratorMVVM.ViewModel"
+        mc:Ignorable="d"
+        Title="Maze Generator" Height="550" Width="500">
+    <Window.Resources>
+        <vm:MainViewModel x:Key="UserViewModel" />
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
+    </Window.Resources>
+    <Grid DataContext="{StaticResource UserViewModel}">
+        <Canvas HorizontalAlignment="Center"
+                Width="400" 
+                Height="400" Margin="46,90,46,29" >
+            <ItemsControl ItemsSource="{Binding ViewSolution}" 
+                      Margin="0,0,0,0" 
+                      Width="400" 
+                      Height="400" 
+                      Visibility="{Binding Path=ShowSolution, Converter={StaticResource BoolToVisConverter} }">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="Canvas.Left" Value="{Binding Left}"/>
+                        <Setter Property="Canvas.Top" Value="{Binding Top}"/>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Canvas>
+                            <Rectangle Name="Background" 
+                                   Width="{Binding Width}" 
+                                   Height="{Binding Width}" 
+                                   Fill="LightGray">
+                            </Rectangle>
+                        </Canvas>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <Canvas Margin="0,0,0,0" Width="400" Height="400">
+                <Rectangle Canvas.Left="{Binding Path=ViewEntrance.Left}" 
+                       Canvas.Top="{Binding Path=ViewEntrance.Top}"
+                       Width="{Binding Path=ViewEntrance.Width}"
+                       Height="{Binding Path=ViewEntrance.Width}"
+                       Fill="LightGreen"
+                       Visibility="{Binding Path=ShowEntranceExit, Converter={StaticResource BoolToVisConverter} }">
+                </Rectangle>
+            </Canvas>
+
+            <Canvas Margin="0,0,0,0" Width="400" Height="400">
+                <Rectangle Canvas.Left="{Binding Path=ViewExit.Left}"
+                       Canvas.Top="{Binding Path=ViewExit.Top}"
+                       Width="{Binding Path=ViewExit.Width}"
+                       Height="{Binding Path=ViewExit.Width}"
+                       Fill="LightPink"
+                       Visibility="{Binding Path=ShowEntranceExit, Converter={StaticResource BoolToVisConverter} }">
+                </Rectangle>
+            </Canvas>
+
+            <ItemsControl ItemsSource="{Binding ViewCells}" 
+                      Margin="0,0,0,0" 
+                      Width="400" 
+                      Height="400">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="Canvas.Left" Value="{Binding Left}"/>
+                        <Setter Property="Canvas.Top" Value="{Binding Top}"/>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Canvas>
+                            <Line Name="North" 
+                              X1="0" 
+                              X2="{Binding Width}" 
+                              Y1 ="{Binding Width}" 
+                              Y2="{Binding Width}" 
+                              StrokeThickness="2" 
+                              Stroke="DarkSlateBlue"  
+                              Visibility="{Binding Path=NorthWall, Converter={StaticResource BoolToVisConverter} }"></Line>
+                            <Line Name="East" 
+                              X1="{Binding Width}" 
+                              X2="{Binding Width}" 
+                              Y1 ="0" 
+                              Y2="{Binding Width}" 
+                              StrokeThickness="2" 
+                              Stroke="DarkSlateBlue" 
+                              Visibility="{Binding Path=EastWall, Converter={StaticResource BoolToVisConverter} }"></Line>
+                            <Line Name="South" 
+                              X1="0" 
+                              X2="{Binding Width}" 
+                              Y1 ="0" 
+                              Y2="0" 
+                              StrokeThickness="2" 
+                              Stroke="DarkSlateBlue" 
+                              Visibility="{Binding Path=SouthWall, Converter={StaticResource BoolToVisConverter} }"></Line>
+                            <Line Name="West" 
+                              X1="0"
+                              X2="0" 
+                              Y1 ="0" 
+                              Y2="{Binding Width}" 
+                              StrokeThickness="2" 
+                              Stroke="DarkSlateBlue" 
+                              Visibility="{Binding Path=WestWall, Converter={StaticResource BoolToVisConverter} }"></Line>
+                        </Canvas>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Canvas>
+        <Button x:Name="GenerateButton" 
+                Content="Generate" 
+                Command="{Binding GenerateMazeCommand}" 
+                HorizontalAlignment="Left" 
+                Margin="18,10,0,0" 
+                VerticalAlignment="Top"
+                Width="75" 
+                Height="51">
+        </Button>
+        <ComboBox x:Name="GeneratorChoice" 
+                  ItemsSource="{Binding MazeGenerators}" 
+                  SelectedItem="{Binding MazeGenerator}"
+                  IsSynchronizedWithCurrentItem="True" 
+                  HorizontalAlignment="Left" 
+                  Margin="182,10,0,0" 
+                  VerticalAlignment="Top" 
+                  Width="285" IsReadOnly="True">
+        </ComboBox>
+        <CheckBox x:Name="SolutionCheckbox" 
+                      IsChecked="{Binding ShowSolution}" 
+                      Content="Solution" 
+                      HorizontalAlignment="Left" 
+                      Margin="182,46,0,0" 
+                      VerticalAlignment="Top">
+        </CheckBox>
+        <CheckBox x:Name="ExitEntranceCheckbox" 
+                  IsChecked="{Binding ShowEntranceExit}"
+                  Content="Entrance and Exit" 
+                  HorizontalAlignment="Left" 
+                  Margin="251,46,0,0" 
+                  VerticalAlignment="Top">
+        </CheckBox>
+        <Label x:Name="label" Content="Label" HorizontalAlignment="Left" Margin="98,37,0,0" VerticalAlignment="Top" Height="7" Width="180"/>
+        <Label x:Name="label1" Content="Generator:" HorizontalAlignment="Left" Margin="115,8,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.227,0.192" Height="27"/>
+        <Label x:Name="label1_Copy" Content="Highlight:" HorizontalAlignment="Left" Margin="115,40,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.227,0.192" Height="27"/>
+        <Label x:Name="label1_Copy1" Content="Size:" HorizontalAlignment="Left" Margin="397,40,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.227,0.192" Height="27"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="21" Margin="436,44,0,0" TextWrapping="Wrap" Text="{Binding Size}" VerticalAlignment="Top" Width="31" TextAlignment="Center" RenderTransformOrigin="0.452,0.19"/>
+    </Grid>
+</Window>

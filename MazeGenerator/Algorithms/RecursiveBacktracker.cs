@@ -67,7 +67,7 @@ namespace MazeGenerator.Algorithms
                     solution.Remove(pathTop);
                 }
             }
-
+            solution.Add(maze.Exit);
             return solution;
         }
 
