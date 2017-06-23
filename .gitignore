@@ -20,3 +20,7 @@
 /MazeTest/obj/x64/Release
 /MazeGeneratorMVVM/bin/Debug
 /MazeGeneratorMVVM/obj/Debug
+/MazeGeneratorMVVM/bin/Release
+/MazeGeneratorMVVMTest/bin/Release
+/MazeGeneratorMVVMTest/obj
+/MazeGeneratorMVVM/obj/Release

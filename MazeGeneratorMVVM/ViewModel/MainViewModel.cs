@@ -9,56 +9,181 @@ namespace MazeGeneratorMVVM.ViewModel
 {
     internal class MainViewModel : ViewModelBase
     {
-        public ObservableCollection<CellItem> ViewCells { get; private set; } = new ObservableCollection<CellItem>();
-        public ObservableCollection<CellItem> ViewSolution { get; private set; } = new ObservableCollection<CellItem>();
+        #region Construtors
+        public MainViewModel()
+        {
+            Size = 20;
+            MazeCanvasSize = 400;
+            GenerateMazeCommand = new RelayCommand(GenerateMaze);
+            MazeGeneratorChoices = new ObservableCollection<IMazeFactory>()
+                {
+                    new RecursiveBacktracker(),
+                    new PrimsAlgorithm()
+                };
+            MazeSolver = new RecursiveBacktracker();
+        }
+        #endregion
 
+        #region API Code Behind
+        private void GenerateMaze()
+        {
+            Maze = SelectedMazeGenerator.generate(Size);
+
+            CreateViewCells();
+            CreateViewSolution();
+            CreateViewEntrance();
+            CreateViewExit();
+        }
+
+        private void CreateViewCells()
+        {
+            ViewCells = new ObservableCollection<CellItem>();
+
+            double graphicsSize = MazeCanvasSize / (double)Size;
+            List<Cell> solution = MazeSolver.FindSolution(Maze);
+
+            for (int row = 0; row < Maze.RowsCount; row++)
+            {
+                for (int column = 0; column < Maze.ColumnsCount; column++)
+                {
+                    Cell cell = Maze[row, column];
+
+                    CellItem cellItem = new CellItem(cell)
+                    {
+                        TopLocation = row * graphicsSize,
+                        LeftLocation = column * graphicsSize,
+                        Width = graphicsSize,
+                    };
+
+                    ViewCells.Add(cellItem);
+                }
+            }
+        }
+
+        private void CreateViewSolution()
+        {
+            ViewSolution = new ObservableCollection<CellItem>();
+
+            List<Cell> solution = MazeSolver.FindSolution(Maze);
+
+            foreach (CellItem cellItem in ViewCells)
+            {
+                if (solution.Contains(cellItem.Cell))
+                {
+                    ViewSolution.Add(cellItem);
+                }
+            }
+        }
+
+        private void CreateViewEntrance()
+        {
+            foreach (CellItem cellItem in ViewCells)
+            {
+                if (cellItem.Cell == Maze.Entrance)
+                {
+                    ViewEntrance = cellItem;
+                    return;
+                }
+            }
+        }
+
+        private void CreateViewExit()
+        {
+            foreach (CellItem cellItem in ViewCells)
+            {
+                if (cellItem.Cell == Maze.Exit)
+                {
+                    ViewExit = cellItem;
+                    return;
+                }
+            }
+        }
+        #endregion
+
+        #region API
         public int Size
         {
             get
             {
-                return size;
+                return _size;
             }
             set
             {
-                if (value > 0)
+                if (value > 0 && value <= 60)
                 {
-                    size = value;
+                    _size = value;
                     RaisePropertyChanged();
                 }
             }
         }
 
-        private int size = 20;
+        public int MazeCanvasSize
+        {
+            get
+            {
+                return _mazeCanvasSize;
+            }
+            set
+            {
+                if (value > 0)
+                {
+                    _mazeCanvasSize = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
 
-        private CellItem viewEntrance;
+        public ObservableCollection<CellItem> ViewCells
+        {
+            get
+            {
+                return _viewCells;
+            }
+            private set
+            {
+                _viewCells = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public ObservableCollection<CellItem> ViewSolution
+        {
+            get
+            {
+                return _viewSolution;
+            }
+            private set
+            {
+                _viewSolution = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public CellItem ViewEntrance
         {
             get
             {
-                return viewEntrance;
+                return _viewEntrance;
             }
             private set
             {
-                viewEntrance = value;
+                _viewEntrance = value;
                 RaisePropertyChanged();
             }
         }
 
-        private CellItem viewExit;
         public CellItem ViewExit
         {
             get
             {
-                return viewExit;
+                return _viewExit;
             }
             private set
             {
-                viewExit = value;
+                _viewExit = value;
                 RaisePropertyChanged();
             }
         }
-
-        private Maze maze;
 
         public bool ShowEntranceExit
         {
@@ -72,7 +197,7 @@ namespace MazeGeneratorMVVM.ViewModel
                 RaisePropertyChanged();
             }
         }
-        private bool _showEntranceExit;
+
         public bool ShowSolution
         {
             get
@@ -85,90 +210,19 @@ namespace MazeGeneratorMVVM.ViewModel
                 RaisePropertyChanged();
             }
         }
-        private bool showSolution;
-        public ObservableCollection<IMazeFactory> MazeGenerators { get; private set; }
-        public IMazeFactory MazeGenerator { get { return mazeGenerator; } set { mazeGenerator = value; RaisePropertyChanged(); } }
-        private IMazeFactory mazeGenerator;
-        private ISolver mazeSolver;
-        private double graphicsSize;
 
-        public MainViewModel()
-        {
-            GenerateMazeCommand = new RelayCommand(GenerateMaze);
-            MazeGenerators = new ObservableCollection<IMazeFactory>()
-                {
-                    new RecursiveBacktracker(),
-                    new PrimsAlgorithm()
-                };
-            mazeSolver = new RecursiveBacktracker();
-        }
+        public ObservableCollection<IMazeFactory> MazeGeneratorChoices { get; private set; }
 
-        private void GenerateMaze()
+        public IMazeFactory SelectedMazeGenerator
         {
-            graphicsSize = 400 / Size;
-            maze = mazeGenerator.generate(Size);
-            CreateViewCells();
-            CreateViewSolution();
-            CreateViewEntrance();
-            CreateViewExit();
-        }
-
-        private void CreateViewCells()
-        {
-            ViewCells.Clear();
-            List<Cell> solution = mazeSolver.FindSolution(maze);
-            for (int i = 0; i < maze.RowsCount; i++)
+            get
             {
-                for (int j = 0; j < maze.ColumnsCount; j++)
-                {
-                    Cell cell = maze[i, j];
-
-                    CellItem cellItem = new CellItem(cell)
-                    {
-                        Top = i * graphicsSize,
-                        Left = j * graphicsSize,
-                        Width = graphicsSize,
-                    };
-
-                    ViewCells.Add(cellItem);
-                }
+                return _selectedMazeGenerator;
             }
-        }
-
-        private void CreateViewEntrance()
-        {
-            foreach (CellItem cellItem in ViewCells)
+            set
             {
-                if (cellItem.Cell == maze.Entrance)
-                {
-                    ViewEntrance = cellItem;
-                    return;
-                }
-            }
-        }
-
-        private void CreateViewExit()
-        {
-            foreach (CellItem cellItem in ViewCells)
-            {
-                if (cellItem.Cell == maze.Exit)
-                {
-                    ViewExit = cellItem;
-                    return;
-                }
-            }
-        }
-
-        private void CreateViewSolution()
-        {
-            ViewSolution.Clear();
-            List<Cell> solution = mazeSolver.FindSolution(maze);
-            foreach (CellItem cellItem in ViewCells)
-            {
-                if (solution.Contains(cellItem.Cell))
-                {
-                    ViewSolution.Add(cellItem);
-                }
+                _selectedMazeGenerator = value;
+                RaisePropertyChanged();
             }
         }
 
@@ -177,5 +231,21 @@ namespace MazeGeneratorMVVM.ViewModel
             get;
             private set;
         }
+        #endregion
+
+        #region Privates
+        private Maze Maze { get; set; }
+        private int _size;
+
+        private int _mazeCanvasSize;
+        private bool _showEntranceExit;
+        private bool showSolution;
+        private CellItem _viewEntrance;
+        private CellItem _viewExit;
+        private ObservableCollection<CellItem> _viewCells;
+        private ObservableCollection<CellItem> _viewSolution;
+        private IMazeFactory _selectedMazeGenerator;
+        private ISolver MazeSolver { get; set; } 
+        #endregion
     }
 }

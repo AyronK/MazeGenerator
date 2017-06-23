@@ -11,14 +11,14 @@
         <vm:MainViewModel x:Key="UserViewModel" />
         <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
     </Window.Resources>
-    <Grid DataContext="{StaticResource UserViewModel}">
+    <Grid DataContext="{StaticResource UserViewModel}">  
         <Canvas HorizontalAlignment="Center"
-                Width="400" 
-                Height="400" Margin="46,90,46,29" >
+                Width="{Binding MazeCanvasSize, Mode=TwoWay }" 
+                Height="{Binding MazeCanvasSize, Mode=TwoWay }"  Margin="46,90,46,29" >
             <ItemsControl ItemsSource="{Binding ViewSolution}" 
                       Margin="0,0,0,0" 
-                      Width="400" 
-                      Height="400" 
+                      Width="{Binding MazeCanvasSize, Mode=TwoWay }"  
+                      Height="{Binding MazeCanvasSize, Mode=TwoWay }"  
                       Visibility="{Binding Path=ShowSolution, Converter={StaticResource BoolToVisConverter} }">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -27,8 +27,8 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemContainerStyle>
                     <Style TargetType="ContentPresenter">
-                        <Setter Property="Canvas.Left" Value="{Binding Left}"/>
-                        <Setter Property="Canvas.Top" Value="{Binding Top}"/>
+                        <Setter Property="Canvas.Left" Value="{Binding LeftLocation}"/>
+                        <Setter Property="Canvas.Top" Value="{Binding TopLocation}"/>
                     </Style>
                 </ItemsControl.ItemContainerStyle>
                 <ItemsControl.ItemTemplate>
@@ -44,9 +44,11 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
 
-            <Canvas Margin="0,0,0,0" Width="400" Height="400">
-                <Rectangle Canvas.Left="{Binding Path=ViewEntrance.Left}" 
-                       Canvas.Top="{Binding Path=ViewEntrance.Top}"
+            <Canvas Margin="0,0,0,0" 
+                    Width="{Binding MazeCanvasSize, Mode=TwoWay }" 
+                    Height="{Binding MazeCanvasSize, Mode=TwoWay }" >
+                <Rectangle Canvas.Left="{Binding Path=ViewEntrance.LeftLocation}" 
+                       Canvas.Top="{Binding Path=ViewEntrance.TopLocation}"
                        Width="{Binding Path=ViewEntrance.Width}"
                        Height="{Binding Path=ViewEntrance.Width}"
                        Fill="LightGreen"
@@ -54,9 +56,11 @@
                 </Rectangle>
             </Canvas>
 
-            <Canvas Margin="0,0,0,0" Width="400" Height="400">
-                <Rectangle Canvas.Left="{Binding Path=ViewExit.Left}"
-                       Canvas.Top="{Binding Path=ViewExit.Top}"
+            <Canvas Margin="0,0,0,0" 
+                    Width="{Binding MazeCanvasSize, Mode=TwoWay }"
+                    Height="{Binding MazeCanvasSize, Mode=TwoWay }" >
+                <Rectangle Canvas.Left="{Binding Path=ViewExit.LeftLocation}"
+                       Canvas.Top="{Binding Path=ViewExit.TopLocation}"
                        Width="{Binding Path=ViewExit.Width}"
                        Height="{Binding Path=ViewExit.Width}"
                        Fill="LightPink"
@@ -66,8 +70,8 @@
 
             <ItemsControl ItemsSource="{Binding ViewCells}" 
                       Margin="0,0,0,0" 
-                      Width="400" 
-                      Height="400">
+                      Width="{Binding MazeCanvasSize, Mode=TwoWay }"  
+                      Height="{Binding MazeCanvasSize, Mode=TwoWay }" >
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <Canvas/>
@@ -75,8 +79,8 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemContainerStyle>
                     <Style TargetType="ContentPresenter">
-                        <Setter Property="Canvas.Left" Value="{Binding Left}"/>
-                        <Setter Property="Canvas.Top" Value="{Binding Top}"/>
+                        <Setter Property="Canvas.Left" Value="{Binding LeftLocation}"/>
+                        <Setter Property="Canvas.Top" Value="{Binding TopLocation}"/>
                     </Style>
                 </ItemsControl.ItemContainerStyle>
                 <ItemsControl.ItemTemplate>
@@ -129,8 +133,8 @@
                 Height="51">
         </Button>
         <ComboBox x:Name="GeneratorChoice" 
-                  ItemsSource="{Binding MazeGenerators}" 
-                  SelectedItem="{Binding MazeGenerator}"
+                  ItemsSource="{Binding MazeGeneratorChoices}" 
+                  SelectedItem="{Binding SelectedMazeGenerator}"
                   IsSynchronizedWithCurrentItem="True" 
                   HorizontalAlignment="Left" 
                   Margin="182,10,0,0" 

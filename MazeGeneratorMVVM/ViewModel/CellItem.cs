@@ -3,7 +3,7 @@ using System.Windows.Media;
 
 namespace MazeGeneratorMVVM.ViewModel
 {
-    class CellItem
+    internal class CellItem
     {
         public Cell Cell { get; private set; }
         public CellItem(Cell cell)
@@ -15,8 +15,8 @@ namespace MazeGeneratorMVVM.ViewModel
             WestWall = Cell.ContainsWall(Direction.West);
         }
 
-        public double Top { get; set; }
-        public double Left { get; set; }
+        public double TopLocation { get; set; }
+        public double LeftLocation { get; set; }
         public double Width { get; set; }
         public bool NorthWall { get; private set; }
         public bool SouthWall { get; private set; }

@@ -5,11 +5,11 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeGeneratorTest", "MazeTest\MazeGeneratorTest.csproj", "{4E179D56-4E1E-46D2-B185-12AE7C99C4DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeGeneratorWPF", "MazeGeneratorWPF\MazeGeneratorWPF.csproj", "{B70D493C-1620-4323-827B-D8547CDCDD19}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeGenerator", "MazeGenerator\MazeGenerator.csproj", "{C94FEACD-8623-4DAA-BCC2-E5E77C79062B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeGeneratorMVVM", "MazeGeneratorMVVM\MazeGeneratorMVVM.csproj", "{41DCACF2-886F-44D5-9E57-BA0F1C775C05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeGeneratorMVVMTest", "MazeGeneratorMVVMTest\MazeGeneratorMVVMTest.csproj", "{9A5ECBC3-8ADD-428C-8658-62006433756A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,18 +33,6 @@ Global
 		{4E179D56-4E1E-46D2-B185-12AE7C99C4DB}.Release|x64.Build.0 = Release|x64
 		{4E179D56-4E1E-46D2-B185-12AE7C99C4DB}.Release|x86.ActiveCfg = Release|x86
 		{4E179D56-4E1E-46D2-B185-12AE7C99C4DB}.Release|x86.Build.0 = Release|x86
-		{B70D493C-1620-4323-827B-D8547CDCDD19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B70D493C-1620-4323-827B-D8547CDCDD19}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B70D493C-1620-4323-827B-D8547CDCDD19}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{B70D493C-1620-4323-827B-D8547CDCDD19}.Debug|x64.Build.0 = Debug|Any CPU
-		{B70D493C-1620-4323-827B-D8547CDCDD19}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{B70D493C-1620-4323-827B-D8547CDCDD19}.Debug|x86.Build.0 = Debug|Any CPU
-		{B70D493C-1620-4323-827B-D8547CDCDD19}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B70D493C-1620-4323-827B-D8547CDCDD19}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B70D493C-1620-4323-827B-D8547CDCDD19}.Release|x64.ActiveCfg = Release|Any CPU
-		{B70D493C-1620-4323-827B-D8547CDCDD19}.Release|x64.Build.0 = Release|Any CPU
-		{B70D493C-1620-4323-827B-D8547CDCDD19}.Release|x86.ActiveCfg = Release|Any CPU
-		{B70D493C-1620-4323-827B-D8547CDCDD19}.Release|x86.Build.0 = Release|Any CPU
 		{C94FEACD-8623-4DAA-BCC2-E5E77C79062B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C94FEACD-8623-4DAA-BCC2-E5E77C79062B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C94FEACD-8623-4DAA-BCC2-E5E77C79062B}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -69,6 +57,18 @@ Global
 		{41DCACF2-886F-44D5-9E57-BA0F1C775C05}.Release|x64.Build.0 = Release|Any CPU
 		{41DCACF2-886F-44D5-9E57-BA0F1C775C05}.Release|x86.ActiveCfg = Release|Any CPU
 		{41DCACF2-886F-44D5-9E57-BA0F1C775C05}.Release|x86.Build.0 = Release|Any CPU
+		{9A5ECBC3-8ADD-428C-8658-62006433756A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A5ECBC3-8ADD-428C-8658-62006433756A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A5ECBC3-8ADD-428C-8658-62006433756A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9A5ECBC3-8ADD-428C-8658-62006433756A}.Debug|x64.Build.0 = Debug|Any CPU
+		{9A5ECBC3-8ADD-428C-8658-62006433756A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9A5ECBC3-8ADD-428C-8658-62006433756A}.Debug|x86.Build.0 = Debug|Any CPU
+		{9A5ECBC3-8ADD-428C-8658-62006433756A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A5ECBC3-8ADD-428C-8658-62006433756A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A5ECBC3-8ADD-428C-8658-62006433756A}.Release|x64.ActiveCfg = Release|Any CPU
+		{9A5ECBC3-8ADD-428C-8658-62006433756A}.Release|x64.Build.0 = Release|Any CPU
+		{9A5ECBC3-8ADD-428C-8658-62006433756A}.Release|x86.ActiveCfg = Release|Any CPU
+		{9A5ECBC3-8ADD-428C-8658-62006433756A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
