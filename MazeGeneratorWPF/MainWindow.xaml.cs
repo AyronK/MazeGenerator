@@ -1,5 +1,6 @@
 ﻿using MazeGenerator;
 using MazeGenerator.Algorithms;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -36,6 +37,7 @@ namespace MazeGeneratorWPF
 
         private void DrawMaze()
         {
+            List<Cell> solution = new RecursiveBacktracker().FindSolution(maze);
             MainCanvas.Children.Clear();
             for (int i = 0; i < maze.RowsCount; i++)
             {
@@ -61,6 +63,16 @@ namespace MazeGeneratorWPF
                         rect.Width = graphicsSize;
                         rect.Height = graphicsSize;
                         rect.Fill = Brushes.LightPink;
+                        MainCanvas.Children.Add(rect);
+                        Canvas.SetTop(rect, i * graphicsSize);
+                        Canvas.SetLeft(rect, j * graphicsSize);
+                    }
+                    else if (solution.Contains(cell))
+                    {
+                        Rectangle rect = new Rectangle();
+                        rect.Width = graphicsSize;
+                        rect.Height = graphicsSize;
+                        rect.Fill = Brushes.LightGray;
                         MainCanvas.Children.Add(rect);
                         Canvas.SetTop(rect, i * graphicsSize);
                         Canvas.SetLeft(rect, j * graphicsSize);

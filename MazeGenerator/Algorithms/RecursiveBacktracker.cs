@@ -40,7 +40,35 @@ namespace MazeGenerator.Algorithms
 
         public List<Cell> FindSolution(Maze maze)
         {
-            throw new NotImplementedException();
+            _maze = maze;
+            InitializeFields();
+            List<Cell> solution = new List<Cell>();
+            selected = _maze.Entrance;
+            Visit(selected);
+
+            while (visited.Count < maze.Count)
+            {
+                if (selected == _maze.Exit)
+                    break;
+
+                List<Cell> passages = GetPassages(selected);
+                if (passages.Count > 0)
+                {
+                    solution.Add(selected);
+                    Cell passage = passages.RandomElement();
+                    path.Push(selected);
+                    SelectCell(passage);
+                    Visit(selected);
+                }
+                else if (path.Count > 0)
+                {
+                    Cell pathTop = path.Pop();
+                    SelectCell(pathTop);
+                    solution.Remove(pathTop);
+                }
+            }
+
+            return solution;
         }
 
         public override Maze generate(int rowsCount, int columnsCount)
