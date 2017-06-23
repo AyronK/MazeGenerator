@@ -3,7 +3,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MazeGeneratorMVVM.ViewModel;
 
-namespace MazeGeneratorMVVMTest
+namespace MazeGeneratorTest
 {
     [TestClass]
     public class MainViewModelTest

@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MazeGenerator;
 using MazeGeneratorMVVM.ViewModel;
 
-namespace MazeGeneratorMVVMTest
+namespace MazeGeneratorTest
 {
     [TestClass]
     public class CellItemTest

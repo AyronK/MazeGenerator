@@ -6,8 +6,8 @@
     <ProjectGuid>{4E179D56-4E1E-46D2-B185-12AE7C99C4DB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MazeTest</RootNamespace>
-    <AssemblyName>MazeTest</AssemblyName>
+    <RootNamespace>MazeGeneratorTest</RootNamespace>
+    <AssemblyName>MazeGeneratorTest</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -71,6 +71,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -92,9 +93,15 @@
     <Compile Include="Algorithms\AlgorithmsSolutionsTest.cs" />
     <Compile Include="CellTest.cs" />
     <Compile Include="MazeTest.cs" />
+    <Compile Include="MVVM\CellItemTest.cs" />
+    <Compile Include="MVVM\MainViewModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MazeGeneratorMVVM\MazeGeneratorMVVM.csproj">
+      <Project>{41dcacf2-886f-44d5-9e57-ba0f1c775c05}</Project>
+      <Name>MazeGeneratorMVVM</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MazeGenerator\MazeGenerator.csproj">
       <Project>{c94feacd-8623-4daa-bcc2-e5e77c79062b}</Project>
       <Name>MazeGenerator</Name>

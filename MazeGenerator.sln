@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeGenerator", "MazeGenera
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeGeneratorMVVM", "MazeGeneratorMVVM\MazeGeneratorMVVM.csproj", "{41DCACF2-886F-44D5-9E57-BA0F1C775C05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeGeneratorMVVMTest", "MazeGeneratorMVVMTest\MazeGeneratorMVVMTest.csproj", "{9A5ECBC3-8ADD-428C-8658-62006433756A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,18 +55,6 @@ Global
 		{41DCACF2-886F-44D5-9E57-BA0F1C775C05}.Release|x64.Build.0 = Release|Any CPU
 		{41DCACF2-886F-44D5-9E57-BA0F1C775C05}.Release|x86.ActiveCfg = Release|Any CPU
 		{41DCACF2-886F-44D5-9E57-BA0F1C775C05}.Release|x86.Build.0 = Release|Any CPU
-		{9A5ECBC3-8ADD-428C-8658-62006433756A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9A5ECBC3-8ADD-428C-8658-62006433756A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9A5ECBC3-8ADD-428C-8658-62006433756A}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{9A5ECBC3-8ADD-428C-8658-62006433756A}.Debug|x64.Build.0 = Debug|Any CPU
-		{9A5ECBC3-8ADD-428C-8658-62006433756A}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{9A5ECBC3-8ADD-428C-8658-62006433756A}.Debug|x86.Build.0 = Debug|Any CPU
-		{9A5ECBC3-8ADD-428C-8658-62006433756A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9A5ECBC3-8ADD-428C-8658-62006433756A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9A5ECBC3-8ADD-428C-8658-62006433756A}.Release|x64.ActiveCfg = Release|Any CPU
-		{9A5ECBC3-8ADD-428C-8658-62006433756A}.Release|x64.Build.0 = Release|Any CPU
-		{9A5ECBC3-8ADD-428C-8658-62006433756A}.Release|x86.ActiveCfg = Release|Any CPU
-		{9A5ECBC3-8ADD-428C-8658-62006433756A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
