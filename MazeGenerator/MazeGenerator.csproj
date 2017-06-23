@@ -40,7 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Algorithms\MazeFactory.cs" />
+    <Compile Include="Algorithms\MazeRandomFactory.cs" />
+    <Compile Include="Algorithms\IMazeFactory.cs" />
+    <Compile Include="Algorithms\ISolver.cs" />
+    <Compile Include="ListRandomExtension.cs" />
     <Compile Include="Algorithms\PrimsAlgorithm.cs" />
     <Compile Include="Algorithms\RecursiveBacktracker.cs" />
     <Compile Include="Data\Cell.cs" />

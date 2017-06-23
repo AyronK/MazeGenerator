@@ -88,8 +88,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Algorithms\MazeSolver.cs" />
     <Compile Include="Algorithms\AlgorithmsTest.cs" />
+    <Compile Include="Algorithms\AlgorithmsSolutionsTest.cs" />
     <Compile Include="CellTest.cs" />
     <Compile Include="MazeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

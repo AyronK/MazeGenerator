@@ -3,178 +3,81 @@ using System.Collections.Generic;
 
 namespace MazeGenerator.Algorithms
 {
-    public class PrimsAlgorithm : MazeFactory
+    public sealed class PrimsAlgorithm : MazeRandomFactory
     {
         private Maze maze = null;
         private Cell selected = null;
-        private List<Cell> touched = null;
-        private List<Cell> connected = null;
+        private List<Cell> inMazeNeighbour = null; 
+        private List<Cell> inMaze = null; 
 
-        public override Maze generate(int rowCount, int columnCount)
+        public override Maze generate(int rowsCount, int columnsCount)
         {
-            maze = new Maze(rowCount, columnCount); maze.Entrance = selected;
-            touched = new List<Cell>();
-            connected = new List<Cell>();
+            maze = new Maze(rowsCount, columnsCount);
+            InitializeFields();
 
-            MakeEntrance();
-            MakeExit();
+            maze.Entrance = maze[0, 0];
+            maze.Exit = maze[rowsCount - 1, columnsCount - 1];
 
-            while (touched.Count > 0)
+            inMaze.Add(maze.Entrance);
+            UpdateInMazeNeighbours(maze.Entrance);
+            while (inMazeNeighbour.Count > 0)
             {
-                selected = GetRandomFrontier();
-                Cell neighbour = GetRandomConnectedNeighbour(selected);
-                RemoveWallsBetween(selected, neighbour);
-                ConnectTouchedToMaze(selected);
-                UpdateTouched(selected);
+                selected = inMazeNeighbour.RandomElement();
+                List<Cell> neighbours = GetInMazeNeighbours(selected);
+                Cell neighbour = neighbours.RandomElement();
+                maze.RemoveWallsBetween(selected, neighbour);
+                AddToMaze(selected);
+                UpdateInMazeNeighbours(selected);
             }
             return maze;
         }
 
-        private void MakeEntrance()
+        private void InitializeFields()
         {
-            Cell entrance = maze[0, 0];
-            maze.Entrance = entrance;
-            maze.Entrance.RemoveWall(Direction.West);
-            connected.Add(entrance);
-            UpdateTouched(entrance);
+            inMazeNeighbour = new List<Cell>();
+            inMaze = new List<Cell>();
         }
 
-        private void MakeExit()
+        private List<Cell> GetInMazeNeighbours(Cell cell)
         {
-            int rowsCount = maze.RowsCount;
-            int columnsCount = maze.ColumnsCount;
-            maze.Exit = maze[rowsCount - 1, columnsCount - 1];
-            maze.Exit.RemoveWall(Direction.East);
-        }
+            IEnumerable<Cell> neighbours = maze.GetNeighbours(cell);
+            List<Cell> connectedNeighbours = new List<Cell>();
 
-        private Cell GetRandomFrontier()
-        {
-            int rnd = random.Next(0, touched.Count);
-            return touched[rnd];
-        }
-
-        private Cell GetRandomConnectedNeighbour(Cell cell)
-        {
-            List<Cell> neighbours = GetConnectedNeighbours(cell);
-            int rnd = random.Next(0, neighbours.Count);
-            return neighbours[rnd];
-        }
-
-        private List<Cell> GetConnectedNeighbours(Cell cell)
-        {
-            List<Cell> neighbours = new List<Cell>();
-
-            int row = maze.RowOf(cell);
-            int column = maze.ColumnOf(cell);
-
-            foreach (Direction direction in Enum.GetValues(typeof(Direction)))
+            foreach (Cell neighbour in neighbours)
             {
-                if (HasNeighbour(cell, direction))
-                {
-                    Cell neighbour = GetNeighbour(cell, direction);
-                    if (connected.Contains(neighbour))
-                        neighbours.Add(neighbour);
-                }
+                if (inMaze.Contains(neighbour))
+                    connectedNeighbours.Add(neighbour);
             }
 
-            return neighbours;
+            return connectedNeighbours;
         }
 
-        private bool HasNeighbour(Cell cell, Direction direction)
+        private void AddToMaze(Cell cell)
         {
-            switch (direction)
+            inMazeNeighbour.Remove(cell);
+            inMaze.Add(cell);
+        }
+
+        private void UpdateInMazeNeighbours(Cell cell)
+        {
+            IEnumerable<Cell> neighbours = maze.GetNeighbours(cell);
+            foreach (Cell neighbour in neighbours)
             {
-                case Direction.North:
-                    return maze.RowOf(cell) < maze.RowsCount - 1;
-                case Direction.South:
-                    return maze.RowOf(cell) > 0;
-                case Direction.East:
-                    return maze.ColumnOf(cell) < maze.ColumnsCount - 1;
-                case Direction.West:
-                    return maze.ColumnOf(cell) > 0;
-                default:
-                    return false;
+                AddToInMazeNeighbours(neighbour);
             }
         }
 
-        private Cell GetNeighbour(Cell cell, Direction direction)
+        private void AddToInMazeNeighbours(Cell cell)
         {
-            int row = maze.RowOf(cell);
-            int column = maze.ColumnOf(cell);
-
-            switch (direction)
+            if (IsNeverUsed(cell))
             {
-                case Direction.North:
-                    return maze[row + 1, column];
-                case Direction.South:
-                    return maze[row - 1, column];
-                case Direction.East:
-                    return maze[row, column + 1];
-                case Direction.West:
-                    return maze[row, column - 1];
-            }
-
-            throw new ArgumentException("Unsupported Direction.");
-        }
-
-        private void RemoveWallsBetween(Cell cell, Cell neightbour)
-        {
-            Direction direction = DirectionOfNeighbour(cell, neightbour);
-            cell.RemoveWall(direction);
-            neightbour.RemoveWall(direction.Opposite());
-        }
-
-        private Direction DirectionOfNeighbour(Cell cell, Cell neighbour)
-        {
-            if (maze.RowOf(cell) == maze.RowOf(neighbour))
-            {
-                if (maze.ColumnOf(cell) > maze.ColumnOf(neighbour))
-                    return Direction.West;
-                else if (maze.ColumnOf(cell) < maze.ColumnOf(neighbour))
-                    return Direction.East;
-            }
-            else if (maze.ColumnOf(cell) == maze.ColumnOf(neighbour))
-            {
-                if (maze.RowOf(cell) > maze.RowOf(neighbour))
-                    return Direction.South;
-                else if (maze.RowOf(cell) < maze.RowOf(neighbour))
-                    return Direction.North;
-            }
-
-            throw new ArgumentException("Cells are not neighbours");
-        }        
-
-        private void ConnectTouchedToMaze(Cell cell)
-        {
-            touched.Remove(cell);
-            connected.Add(cell);
-        }
-
-        private void UpdateTouched(Cell cell)
-        {
-            int row = maze.RowOf(cell);
-            int column = maze.ColumnOf(cell);
-            if (row > 0)
-                AddToFrontier(maze[row - 1, column]);
-            if (row < maze.RowsCount - 1)
-                AddToFrontier(maze[row + 1, column]);
-            if (column > 0)
-                AddToFrontier(maze[row, column-1]);
-            if (column < maze.ColumnsCount - 1)
-                AddToFrontier(maze[row, column+1]);
-        }
-
-        private void AddToFrontier(Cell cell)
-        {
-            if (IsNotUsed(cell))
-            {
-                touched.Add(cell);
+                inMazeNeighbour.Add(cell);
             }
         }
 
-        private bool IsNotUsed(Cell cell)
+        private bool IsNeverUsed(Cell cell)
         {
-            return !touched.Contains(cell) && !connected.Contains(cell);
+            return !inMazeNeighbour.Contains(cell) && !inMaze.Contains(cell);
         }
     }
 }

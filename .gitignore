@@ -12,3 +12,9 @@
 /MazeTest/bin/x64/Debug
 /MazeTest/obj/x64/Debug
 /MazeTest/obj/x86/Debug
+/MazeGenerator/bin/Release
+/MazeGenerator/obj/Release
+/MazeGeneratorWPF/bin/Release
+/MazeGeneratorWPF/obj/Release
+/MazeTest/bin/x64/Release
+/MazeTest/obj/x64/Release
