@@ -82,8 +82,7 @@ namespace MazeGenerator
 
         private void FillGrid()
         {
-            int totalAmountOfCells = RowsCount * ColumnsCount;
-            for (int rowsCount = 0; rowsCount < totalAmountOfCells; rowsCount++)
+            for (int rowsCount = 0; rowsCount < Count; rowsCount++)
             {
                 grid.Add(new Cell());
             }
